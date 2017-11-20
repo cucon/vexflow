@@ -230,6 +230,7 @@ export class Articulation extends Modifier {
     this.render_options = {
       font_scale: 38,
     };
+    this.showAtHead = false;
 
     this.articulation = Flow.articulationCodes(this.type);
     if (!this.articulation) {
@@ -270,37 +271,48 @@ export class Articulation extends Modifier {
 
     const initialOffset = getInitialOffset(note, position);
 
-    let y = {
-      [ABOVE]: () => {
-        glyph.setOrigin(0.5, 1);
-        const y = getTopY(note, textLine) - ((textLine + initialOffset) * staffSpace);
-        return shouldSitOutsideStaff
-          ? Math.min(stave.getYForTopText(Articulation.INITIAL_OFFSET), y)
-          : y;
-      },
-      [BELOW]: () => {
-        glyph.setOrigin(0.5, 0);
-        const y = getBottomY(note, textLine) + ((textLine + initialOffset) * staffSpace);
-        return shouldSitOutsideStaff
-          ? Math.max(stave.getYForBottomText(Articulation.INITIAL_OFFSET), y)
-          : y;
-      },
-    }[position]();
+    let y;
 
-    if (!isTab) {
-      const offsetDirection = position === ABOVE ? -1 : +1;
-      const noteLine = isTab ? note.positions[index].str : note.getKeyProps()[index].line;
-      const distanceFromNote = (note.getYs()[index] - y) / staffSpace;
-      const articLine = distanceFromNote + noteLine;
-      const snappedLine = snapLineToStaff(canSitBetweenLines, articLine, position, offsetDirection);
+    if (this.showAtHead) {
+      y = note.note_heads[index].getY() + staffSpace * 1.1 * this.showAtHead;
+      glyph.setOrigin(0.5, 0.5);
+    } else {
+      y = {
+        [ABOVE]: () => {
+          glyph.setOrigin(0.5, 1);
+          const y = getTopY(note, textLine) - ((textLine + initialOffset) * staffSpace);
+          return shouldSitOutsideStaff
+            ? Math.min(stave.getYForTopText(Articulation.INITIAL_OFFSET), y)
+            : y;
+        },
+        [BELOW]: () => {
+          glyph.setOrigin(0.5, 0);
+          const y = getBottomY(note, textLine) + ((textLine + initialOffset) * staffSpace);
+          return shouldSitOutsideStaff
+            ? Math.max(stave.getYForBottomText(Articulation.INITIAL_OFFSET), y)
+            : y;
+        },
+      }[position]();
 
-      if (isWithinLines(snappedLine, position)) glyph.setOrigin(0.5, 0.5);
+      if (!isTab) {
+        const offsetDirection = position === ABOVE ? -1 : +1;
+        const noteLine = isTab ? note.positions[index].str : note.getKeyProps()[index].line;
+        const distanceFromNote = (note.getYs()[index] - y) / staffSpace;
+        const articLine = distanceFromNote + noteLine;
+        const snappedLine = snapLineToStaff(
+          canSitBetweenLines, articLine, position, offsetDirection
+        );
 
-      y += Math.abs(snappedLine - articLine) * staffSpace * offsetDirection;
+        if (isWithinLines(snappedLine, position)) glyph.setOrigin(0.5, 0.5);
+
+        y += Math.abs(snappedLine - articLine) * staffSpace * offsetDirection;
+      }
     }
 
     L(`Rendering articulation at (x: ${x}, y: ${y})`);
 
     glyph.render(ctx, x, y);
   }
+
+  stickToHead(position) { this.showAtHead = position; return this; }
 }
