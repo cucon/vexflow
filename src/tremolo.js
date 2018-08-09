@@ -45,8 +45,9 @@ export class Tremolo extends Modifier {
 
     this.setRendered();
     const start = this.note.getModifierStartXY(this.position, this.index);
+
     let x = start.x;
-    let y = start.y;
+    let y = start.y - (this.num - 1) * 2;
 
     x += this.shift_right;
     for (let i = 0; i < this.num; ++i) {
