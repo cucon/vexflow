@@ -36,10 +36,10 @@ export class GraceNoteGroup extends Modifier {
       const gracenote_group = gracenote_groups[i];
       const note = gracenote_group.getNote();
       const is_stavenote = (note.getCategory() === StaveNote.CATEGORY);
-      const spacing = (is_stavenote ?  group_spacing_stave : group_spacing_tab);
+      const spacing = (is_stavenote ? group_spacing_stave : group_spacing_tab);
 
       if (is_stavenote && note !== prev_note) {
-         // Iterate through all notes to get the displaced pixels
+        // Iterate through all notes to get the displaced pixels
         for (let n = 0; n < note.keys.length; ++n) {
           const props_tmp = note.getKeyProps()[n];
           shiftL = (props_tmp.displaced ? note.getExtraLeftPx() : shiftL);
@@ -153,26 +153,7 @@ export class GraceNoteGroup extends Modifier {
     }
 
     this.setRendered();
-    const that = this;
-    function alignGraceNotesWithNote(grace_notes, note) {
-      // Shift over the tick contexts of each note
-      // So that th aligned with the note
-      const tickContext = note.getTickContext();
-      const extraPx = tickContext.getExtraPx();
-      const x = tickContext.getX()
-        - extraPx.left
-        - extraPx.extraLeft
-        + that.getSpacingFromNextModifier();
-
-      grace_notes.forEach(graceNote => {
-        const tick_context = graceNote.getTickContext();
-        const x_offset = tick_context.getX();
-        graceNote.setStave(note.stave);
-        tick_context.setX(x + x_offset);
-      });
-    }
-
-    alignGraceNotesWithNote(this.grace_notes, note, this.width);
+    this.alignSubNotesWithNote(this.getGraceNotes(), note); // Modifier function
 
     // Draw notes
     this.grace_notes.forEach(graceNote => {

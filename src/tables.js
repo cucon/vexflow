@@ -95,7 +95,7 @@ Flow.keyProperties = (key, clef, params) => {
   if (line >= 6 && (((line * 2) % 2) === 0)) stroke = -1; // stroke down
 
   // Integer value for note arithmetic.
-  const int_value = typeof(value.int_val) !== 'undefined'
+  const int_value = typeof (value.int_val) !== 'undefined'
     ? (octave * 12) + value.int_val
     : null;
 
@@ -201,7 +201,7 @@ Flow.keyProperties.note_glyph = {
 };
 
 Flow.integerToNote = integer => {
-  if (typeof(integer) === 'undefined') {
+  if (typeof (integer) === 'undefined') {
     throw new Vex.RERR('BadArguments', 'Undefined integer for integerToNote');
   }
 
@@ -264,7 +264,7 @@ Flow.articulationCodes.articulations = {
   'av': { code: 'v28', between_lines: true }, // Staccatissimo
   'a>': { code: 'v42', between_lines: true }, // Accent
   'a-': { code: 'v25', between_lines: true }, // Tenuto
-  'a^': { code: 'va',  between_lines: false }, // Marcato
+  'a^': { code: 'va', between_lines: false }, // Marcato
   'a+': { code: 'v8b', between_lines: false }, // Left hand pizzicato
   'ao': { code: 'v94', between_lines: false }, // Snap pizzicato
   'ah': { code: 'vb9', between_lines: false }, // Natural harmonic or open note
@@ -278,24 +278,24 @@ Flow.articulationCodes.articulations = {
 Flow.accidentalCodes = acc => Flow.accidentalCodes.accidentals[acc];
 
 Flow.accidentalCodes.accidentals = {
-  '#':   { code: 'v18', parenRightPaddingAdjustment: -1 },
-  '##':  { code: 'v7f', parenRightPaddingAdjustment: -1 },
-  'b':   { code: 'v44', parenRightPaddingAdjustment: -2 },
-  'bb':  { code: 'v26', parenRightPaddingAdjustment: -2 },
-  'n':   { code: 'v4e', parenRightPaddingAdjustment: -1 },
-  '{':   { code: 'v9c', parenRightPaddingAdjustment: -1 },
-  '}':   { code: 'v84', parenRightPaddingAdjustment: -1 },
-  'db':  { code: 'v9e', parenRightPaddingAdjustment: -1 },
-  'd':   { code: 'vab', parenRightPaddingAdjustment:  0 },
+  '#': { code: 'v18', parenRightPaddingAdjustment: -1 },
+  '##': { code: 'v7f', parenRightPaddingAdjustment: -1 },
+  'b': { code: 'v44', parenRightPaddingAdjustment: -2 },
+  'bb': { code: 'v26', parenRightPaddingAdjustment: -2 },
+  'n': { code: 'v4e', parenRightPaddingAdjustment: -1 },
+  '{': { code: 'v9c', parenRightPaddingAdjustment: -1 },
+  '}': { code: 'v84', parenRightPaddingAdjustment: -1 },
+  'db': { code: 'v9e', parenRightPaddingAdjustment: -1 },
+  'd': { code: 'vab', parenRightPaddingAdjustment: 0 },
   'bbs': { code: 'v90', parenRightPaddingAdjustment: -1 },
-  '++':  { code: 'v51', parenRightPaddingAdjustment: -1 },
-  '+':   { code: 'v78', parenRightPaddingAdjustment: -1 },
-  '+-':  { code: 'v8d', parenRightPaddingAdjustment: -1 },
+  '++': { code: 'v51', parenRightPaddingAdjustment: -1 },
+  '+': { code: 'v78', parenRightPaddingAdjustment: -1 },
+  '+-': { code: 'v8d', parenRightPaddingAdjustment: -1 },
   '++-': { code: 'v7a', parenRightPaddingAdjustment: -1 },
-  'bs':  { code: 'vb7', parenRightPaddingAdjustment: -1 },
+  'bs': { code: 'vb7', parenRightPaddingAdjustment: -1 },
   'bss': { code: 'v39', parenRightPaddingAdjustment: -1 },
-  'o':   { code: 'vd0', parenRightPaddingAdjustment: -1 },
-  'k':   { code: 'vd1', parenRightPaddingAdjustment: -1 },
+  'o': { code: 'vd0', parenRightPaddingAdjustment: -1 },
+  'k': { code: 'vd1', parenRightPaddingAdjustment: -1 },
 };
 
 Flow.accidentalColumnsTable = {
@@ -320,7 +320,8 @@ Flow.accidentalColumnsTable = {
     a: [1, 3, 5, 4, 2],
     b: [1, 2, 4, 3, 1],
     spaced_out_pentachord: [1, 2, 3, 2, 1],
-    very_spaced_out_pentachord: [1, 2, 1, 2, 1] },
+    very_spaced_out_pentachord: [1, 2, 1, 2, 1],
+  },
   6: {
     a: [1, 3, 5, 6, 4, 2],
     b: [1, 2, 4, 5, 3, 1],
@@ -411,7 +412,7 @@ Flow.unicode = {
   'triangle': String.fromCharCode(parseInt('25B3', 16)),
   // half-diminished
   'o-with-slash': String.fromCharCode(parseInt('00F8', 16)),
-   // Diminished
+  // Diminished
   'degrees': String.fromCharCode(parseInt('00B0', 16)),
   'circle': String.fromCharCode(parseInt('25CB', 16)),
 };
@@ -426,7 +427,7 @@ Flow.keySignature.accidentalList = (acc) => {
 };
 
 Flow.parseNoteDurationString = durationString => {
-  if (typeof(durationString) !== 'string') {
+  if (typeof (durationString) !== 'string') {
     return null;
   }
 
@@ -481,7 +482,7 @@ Flow.parseNoteData = noteData => {
 
   const dots = noteData.dots ? noteData.dots : durationStringData.dots;
 
-  if (typeof(dots) !== 'number') {
+  if (typeof (dots) !== 'number') {
     return null;
   }
 
@@ -749,7 +750,7 @@ Flow.durationToGlyph.duration_codes = {
         line_below: 1.5,
       },
       's': { // Quarter slash
-         // Drawn with canvas primitives
+        // Drawn with canvas primitives
         getWidth: () => Flow.SLASH_NOTEHEAD_WIDTH,
         position: 'B/4',
       },
@@ -989,12 +990,198 @@ Flow.durationToGlyph.duration_codes = {
         line_below: 3.0,
       },
       's': { // Hundred-twenty-eight rest
-              // Drawn with canvas primitives
+        // Drawn with canvas primitives
         getWidth: () => Flow.SLASH_NOTEHEAD_WIDTH,
         position: 'B/4',
       },
     },
   },
+};
+
+// For future collaboration with the SMuFL Standard Music Font Layout
+
+Flow.smufl = {};
+
+// add references between smufl glyph names and code points.
+Flow.smufl.to_code_points = {
+  // staff brackets and dividers (e000-e00f)
+  bracketTop: 'v1b',
+  bracketBottom: 'v10',
+
+  // barlines (e030-e03f)
+  barlineTick: 'v6f',
+
+  // repeats (e040-e04f)
+  segno: 'v8c',
+  coda: 'v4d',
+
+  // clefs (e050-e07f)
+  gClef: 'v83',
+  cClef: 'vad',
+  fClef: 'v79',
+  unpitchedPercussionClef1: 'v59', // same as breveNoteheadHarmonic
+  '6stringTabClef': 'v2f',
+
+  // time signatures (e080-e09f)
+  timeSig0: 'v0',
+  timeSig1: 'v1',
+  timeSig2: 'v2',
+  timeSig3: 'v3',
+  timeSig4: 'v4',
+  timeSig5: 'v5',
+  timeSig6: 'v6',
+  timeSig7: 'v7',
+  timeSig8: 'v8',
+  timeSig9: 'v9',
+  timeSigCommon: 'v41',
+  timeSigCutCommon: 'vb6',
+
+  // notehead (e0a0-e0ff)
+  noteheadDoubleWhole: 'v53',
+  noteheadWhole: 'v1d',
+  noteheadHalf: 'v81',
+  noteheadBlack: 'vb',
+  noteheadXWhole: 'v92',
+  noteheadXHalf: 'v95',
+  noteheadXBlack: 'v3e',
+  noteheadCircleX: 'v3b',
+  noteheadTriangleUpWhole: 'v49',
+  noteheadTriangleUpHalf: 'v93',
+  noteheadTriangleUpBlack: 'v40',
+  noteheadDiamondWhole: 'v46',
+  noteheadDiamondHalf: 'v2d',
+  noteheadDiamondBlack: 'v22',
+
+  // individual notes (e1d0-e1ef)
+  augmentationDot: 'v23',
+
+  // temolos (e220-e23f)
+  tremolo1: 'v74',
+
+  // flags (e240-e25f)
+  flag8thUp: 'v54',
+  flag8thDown: 'v9a',
+  flag16thUp: 'v3f',
+  flag16thDown: 'v8f',
+  flag32ndUp: 'v47',
+  flag32ndDown: 'v2a',
+  flag64thUp: 'va9',
+  flag64thDown: 'v58',
+  flag128thUp: 'v9b',
+  flag128thDown: 'v30',
+
+  // standard accidentals (e260-e26f)
+  accidentalFlat: 'v44',
+  accidentalNatural: 'v4e',
+  accidentalSharp: 'v18',
+  accidentalDoubleSharp: 'v7f',
+  accidentalDoubleFlat: 'v26',
+  accidentalParensLeft: 'v9c',
+  accidentalParensRight: 'v84',
+
+  // stein-zimmermann accidentals (24-edo) (e280-e28f)
+  accidentalQuarterToneFlatStein: 'vab',
+  accidentalThreeQuarterTonesFlatZimmermann: 'v9e',
+  accidentalQuarterToneSharpStein: 'v78',
+  accidentalThreeQuarterTonesSharpStein: 'v51',
+
+  // arel-ezgi-uzdilek accidentals (e440-e44f)
+  accidentalBuyukMucennebFlat: 'v39',
+  accidentalBakiyeFlat: 'vb7',
+  accidentalKomaSharp: 'v51', // same as accidentalQuarterToneSharpStein
+  accidentalKucukMucennebSharp: 'v8d',
+
+  // persian accidentals (e460-e46f)
+  accidentalKoron: 'vd1',
+  accidentalSori: 'vd0',
+
+  // articulation (e4a0-e4bf)
+  articAccentAbove: 'v42',
+  articAccentBelow: 'v42', // same as above
+  articTenutoAbove: 'v25',
+  articTenutoBelow: 'v25', // same as above
+  articStaccatoAbove: 'v23', // = dot
+  articStaccatoBelow: 'v23', // = dot
+  articStaccatissimoAbove: 'v28',
+  articMarcatoAbove: 'va',
+
+  // holds and pauses (e4c0-e4df)
+  fermataAbove: 'v43',
+  fermataBelow: 'v5b',
+  breathMarkComma: 'v6c',
+  breathMarkUpbow: 'v8a', // looks better than current upbow
+  caesura: 'v34',
+  caesuraCurved: 'v4b',
+
+  // rests (e4e0-e4ff)
+  restMaxima: 'v59', // not designed for this, but should do the trick
+  // need restLonga -- used in multimeasure rests, like above
+  restDoubleWhole: 'v31',
+  restWhole: 'v5c',
+  restHalf: 'vc',
+  restQuarter: 'v7c',
+  rest8th: 'va5',
+  rest16th: 'v3c',
+  rest32nd: 'v55',
+  rest64th: 'v38',
+  rest128th: 'vaa',
+
+  // dynamics (e520-e54f)
+  dynamicPiano: 'vbf',
+  dynamicMezzo: 'v62',
+  dynamicForte: 'vba',
+  dynamicRinforzando: 'vba',
+  dynamicSforzando: 'v4a',
+  dynamicZ: 'v80',
+
+  // common ornaments (e560-e56f)
+  ornamentTrill: 'v1f',
+  ornamentTurn: 'v72',
+  ornamentTurnSlash: 'v33',
+  ornamentMordent: 'v45',
+  ornamentMordentInverted: 'v1e',
+  ornamentTremblement: 'v86',
+
+  // precomposed trills and mordents (e5b0-e5cf)
+  ornamentPrecompAppoggTrill: 'v20',
+  ornamentPrecompSlideTrillDAnglebert: 'v60',
+  ornamentPrecompSlideTrillBach: 'v29',
+  ornamentPrecompTrillSuffixDandrieu: 'v6d',
+  ornamentPrecompDoubleCadenceUpperPrefix: 'vb4',
+  ornamentPrecompDoubleCadenceUpperPrefixTurn: 'v68',
+  ornamentPrecompTrillLowerSuffix: 'v2c',
+
+  // string techniques (e610-e62f)
+  stringsDownBow: 'v94',
+  stringsUpBow: 'v75',
+  stringsHarmonic: 'vb9',
+
+  // plucked techniques (e630-e63f)
+  pluckedSnapPizzicatoAbove: 'v94',
+  pluckedLeftHandPizzicato: 'v8b', // plus sign
+
+  // keyboard techniques (e650-e67f)
+  keyboardPedalPed: 'v36',
+  keyboardPedalUp: 'v5d',
+
+  // percussion playing technique pictograms (e7f0-e80f)
+  pictChokeCymbal: 'vb3',
+
+  // multi-segment lines (eaa0-eb0f)
+  wiggleArpeggiatoUp: 'va3', // rotated 90deg from reference implementation
+
+  // arrows and arrowheads (eb60-eb8f)
+  arrowheadBlackUp: 'vc3',
+  arrowheadBlackDown: 'v52',
+
+  // not found:
+  // noteheadDiamondWhole: 'v27', stylistic alternate to v46?
+  // noteheadDiamondBlack: 'v70', stylistic alternate to v22?
+  // noteheadTriangleUpBlack: 'v7d', stylistic alternate to v40?
+  // accidentalSlashedDoubleFlat: 'v90',
+  // accidentalOneAndAHalfSharpTurned: 'v7a',
+  // unused marcato alternative?  'v5a',
+  // arpeggioBrushDown: 'v11',
 };
 
 // Some defaults
