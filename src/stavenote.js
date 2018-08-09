@@ -701,7 +701,9 @@ export class StaveNote extends StemmableNote {
       throw new Vex.RERR('NoYValues', 'No Y-Values calculated for this note.');
     }
 
-    const { ABOVE, BELOW, LEFT, RIGHT } = Modifier.Position;
+    let y = this.ys[index];
+
+    const { ABOVE, BELOW, LEFT, RIGHT, CENTER } = Modifier.Position;
     let x = 0;
     if (position === LEFT) {
       // extra_left_px
@@ -717,11 +719,19 @@ export class StaveNote extends StemmableNote {
       }
     } else if (position === BELOW || position === ABOVE) {
       x = this.getGlyphWidth() / 2;
+    } else if (position === CENTER) {
+      x = this.getStemX() - this.getAbsoluteX();
+
+      if (this.stem_direction === Stem.UP) {
+        y = this.stem.y_top - 34;
+      } else {
+        y = this.stem.y_bottom + 4;
+      }
     }
 
     return {
-      x: this.getAbsoluteX() + x,
-      y: this.ys[index],
+      x: this.getAbsoluteX() + x - 1,
+      y,
     };
   }
 

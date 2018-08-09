@@ -29,6 +29,7 @@ export class Modifier extends Element {
       RIGHT: 2,
       ABOVE: 3,
       BELOW: 4,
+      CENTER: 5,
     };
   }
 
@@ -38,6 +39,7 @@ export class Modifier extends Element {
       below: Modifier.Position.BELOW,
       left: Modifier.Position.LEFT,
       right: Modifier.Position.RIGHT,
+      center: Modifier.Position.CENTER,
     };
   }
 
